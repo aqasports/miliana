@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاضرة مليانة - منارة العلم والتزكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2c5aa0;
+            --accent: #4a90e2;
+            --gold: #d4af37;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --gradient: linear-gradient(135deg, #1e3a5f 0%, #4a90e2 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 55px;
+            width: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu li a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.7rem 1.3rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* ========== PAGE CONTAINER ========== */
+        .page-content {
+            min-height: 100vh;
+            padding-top: 85px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.95) 0%, rgba(44, 90, 160, 0.85) 100%),
+                        url('https://images.unsplash.com/photo-1584286595398-a59f21d7f1b9?w=1920') center/cover;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-family: 'Amiri', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .quran-verse {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-right: 4px solid var(--gold);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: #c9a43a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* ========== SECTIONS ========== */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-desc {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ========== CARDS ========== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(30, 58, 95, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(30, 58, 95, 0.15);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* ========== FEATURES ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(30, 58, 95, 0.1) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* ========== STATS ========== */
+        .stats-section {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* ========== TIMELINE ========== */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(50%);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--accent);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-date {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .nav.shrink {
+    padding: 0.4rem 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+}
+.nav.shrink .logo-img {
+    height: 35px;
+}
+
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1300px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .features-grid,
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline::before {
+                right: 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                padding-right: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid,
+            .stats-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="logo.png" alt="حاضرة مليانة" class="logo" onerror="this.style.display='none'">
+              
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" data-page="home" class="active">الرئيسية</a></li>
+                <li><a href="#" data-page="mitaq">الميثاق</a></li>
+                <li><a href="#" data-page="mutun">المتون</a></li>
+                <li><a href="#" data-page="programs">البرامج</a></li>
+                <li><a href="#" data-page="history">التاريخ</a></li>
+                <li><a href="#" data-page="scholars">العلماء</a></li>
+                <li><a href="#" data-page="institutions">المؤسسات</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">✦ مشروع حضاري لإحياء التعليم الأصيل ✦</div>
+                    <h1>حاضرة مليانة</h1>
+                    <p class="hero-subtitle">منارة العلم والتزكية في مدينة التاريخ</p>
+                    <div class="quran-verse">
+                        ﴿يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ﴾
+                    </div>
+                    <div class="hero-cta">
+                        <a href="#" data-page="programs" class="btn btn-primary">استكشف البرامج</a>
+                        <a href="#" data-page="mitaq" class="btn btn-secondary">اطلع على الميثاق</a>
+                    </div>
+                </div>
+            </section>
+
+            <section style="background: white;">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">من نحن</span>
+                        <h2 class="section-title">رسالتنا الحضارية</h2>
+                        <p class="section-desc">نسعى لإحياء نموذج المحضرة الشنقيطية في التعليم والتربية، وإعادة مليانة إلى مكانتها كحاضرة علم وصلاح</p>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3 style="font-family: 'Amiri', serif; font-size: 1.4rem; margin-bottom: 1rem;">التعليم الأصيل</h3>
+                            <p style="color: var(--gray);">منهج تربوي قائم على الصحبة والسند والتلقي المباشر</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🕌</div>
+                            <h3 style="font-family: 'Amiri', serif; font-size: 1.4rem; margin-bottom: 1rem;">المساجد الحية</h3>
+                            <p style="color: var(--gray);">إعادة تأهيل المساجد والزوايا كمراكز علم ومعرفة</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">👥</div>
+                            <h3 style="font-family: 'Amiri', serif; font-size: 1.4rem; margin-bottom: 1rem;">العلماء الربانيون</h3>
+                            <p style="color: var(--gray);">إعداد جيل من العلماء يجمعون بين العلم والعمل</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats-section">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div>
+                            <div class="stat-number">١٥+</div>
+                            <div class="stat-label">قرون من العلم</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">٣٠+</div>
+                            <div class="stat-label">مسجد وزاوية</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">١٠٠+</div>
+                            <div class="stat-label">عالم ومفكر</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">٥</div>
+                            <div class="stat-label">برامج تعليمية</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">القيم المؤسسة</span>
+                        <h2 class="section-title">أسسنا التربوية</h2>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon">🎯</div>
+                            <h3>الحرية في الطلب</h3>
+                            <p>الطالب يختار شيخه ومنهجه بناء على ميوله واستعداده</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🤝</div>
+                            <h3>الصحبة والسند</h3>
+                            <p>التعلم بالمعايشة والتلقي المباشر من العلماء</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📖</div>
+                            <h3>التدرج المنهجي</h3>
+                            <p>من القرآن إلى الفقه إلى العلوم العقلية بتدرج محكم</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">⚖️</div>
+                            <h3>العمل بالعلم</h3>
+                            <p>لا علم بلا عمل ولا عمل بلا نية صادقة</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">✨</div>
+                            <h3>الأدب والتزكية</h3>
+                            <p>الأدب مفتاح العلم والتزكية طريق المعرفة</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🌟</div>
+                            <h3>خدمة المجتمع</h3>
+                            <p>العلم مسؤولية مجتمعية ورسالة حضارية</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- MITAQ PAGE -->
+        <div id="mitaq" class="page">
+            <section style="padding-top: 4rem; background: white;">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">الوثيقة التأسيسية</span>
+                        <h2 class="section-title">ميثاق التأسيس</h2>
+                        <p class="section-desc">الأسس والمبادئ التي يقوم عليها مشروع حاضرة مليانة</p>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card" style="grid-column: 1 / -1;">
+                            <div class="card-icon">🌟</div>
+                            <h3>الرؤية</h3>
+                            <p style="font-size: 1.1rem;">أن تكون حاضرة مليانة منارةً للعلم الأصيل والتربية الأخلاقية، تُعيد إلى الأمة نموذج التعليم التلقيني الحر القائم على الصحبة والسند، وتُخرّج علماء ربانيين يربطون بين نصوص الوحي ومقاصد الحياة.</p>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🎯</div>
+                            <h3>الرسالة</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li>✓ إحياء نموذج المحضرة الشنقيطية</li>
+                                <li>✓ إعادة تأهيل المساجد والزوايا</li>
+                                <li>✓ نشر العلوم الشرعية والعقلية</li>
+                                <li>✓ إعداد علماء ربانيين</li>
+                                <li>✓ غرس قيمة العلم كعبادة</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">📋</div>
+                            <h3>الأهداف الاستراتيجية</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li>✓ تخريج 100 طالب علم سنوياً</li>
+                                <li>✓ إحياء 10 مساجد كمراكز علم</li>
+                                <li>✓ توثيق تراث المنطقة العلمي</li>
+                                <li>✓ بناء شبكة علماء إقليمية</li>
+                                <li>✓ نشر 20 متناً محققاً</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <a href="#" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 3rem;">
+                            📥 تحميل الميثاق كاملاً
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- MUTUN PAGE -->
+        <div id="mutun" class="page">
+            <section style="padding-top: 4rem;">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">المنهج الدراسي</span>
+                        <h2 class="section-title">المتون التعليمية</h2>
+                        <p class="section-desc">المتون الأساسية التي تُدرس في حاضرة مليانة على منهج المحاضر الشنقيطية</p>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon">📖</div>
+                            <h3>القرآن وعلومه</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li><strong>• القرآن الكريم</strong> - حفظاً وتجويداً</li>
+                                <li><strong>• تحفة الأطفال</strong> - في التجويد</li>
+                                <li><strong>• الجزرية</strong> - في التجويد</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">⚖️</div>
+                            <h3>الفقه وأصوله</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li><strong>• مختصر الأخضري</strong> - في الفقه المالكي</li>
+                                <li><strong>• الرسالة</strong> - لابن أبي زيد القيرواني</li>
+                                <li><strong>• مختصر خليل</strong> - في الفقه المتقدم</li>
+                                <li><strong>• مراقي السعود</strong> - في أصول الفقه</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">✍️</div>
+                            <h3>اللغة العربية</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li><strong>• الآجرومية</strong> - في النحو</li>
+                                <li><strong>• قطر الندى</strong> - في النحو</li>
+                                <li><strong>• ألفية ابن مالك</strong> - في النحو والصرف</li>
+                                <li><strong>• الجوهر المكنون</strong> - في البلاغة</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🧠</div>
+                            <h3>العقيدة والمنطق</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li><strong>• العقيدة الطحاوية</strong> - في العقيدة</li>
+                                <li><strong>• جوهرة التوحيد</strong> - في العقيدة</li>
+                                <li><strong>• السلم المنورق</strong> - في المنطق</li>
+                                <li><strong>• إيساغوجي</strong> - في المنطق</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">📚</div>
+                            <h3>الحديث والسيرة</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li><strong>• الأربعون النووية</strong> - في الحديث</li>
+                                <li><strong>• عمدة الأحكام</strong> - في الحديث</li>
+                                <li><strong>• بلوغ المرام</strong> - في الحديث</li>
+                                <li><strong>• الشمائل المحمدية</strong> - في السيرة</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🌙</div>
+                            <h3>التزكية والسلوك</h3>
+                            <ul style="list-style: none; padding: 0; color: var(--gray); line-height: 2;">
+                                <li><strong>• الحكم العطائية</strong> - في التصوف</li>
+                                <li><strong>• رسالة القشيرية</strong> - في التصوف</li>
+                                <li><strong>• إحياء علوم الدين</strong> - مختارات</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PROGRAMS PAGE -->
+        <div id="programs" class="page">
+            <section style="padding-top: 4rem; background: white;">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">المسارات التعليمية</span>
+                        <h2 class="section-title">برامجنا</h2>
+                        <p class="section-desc">برامج متنوعة تناسب جميع المستويات والأعمار</p>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon">📚</div>
+                            <h3>برنامج الطالب المبتدئ</h3>
+                            <p style="margin-bottom: 1rem;">للمبتدئين في طلب العلم، يركز على حفظ القرآن والمتون الأساسية مع تعلم أساسيات الفقه واللغة.</p>
+                            <div style="background: rgba(74, 144, 226, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <strong style="color: var(--primary);">المدة:</strong> سنتان<br>
+                                <strong style="color: var(--primary);">المستوى:</strong> مبتدئ<br>
+                                <strong style="color: var(--primary);">الحضور:</strong> يومي
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">📖</div>
+                            <h3>برنامج الطالب المتوسط</h3>
+                            <p style="margin-bottom: 1rem;">دراسة معمقة للفقه واللغة والأصول مع التركيز على الفهم والتحليل والقدرة على الاستنباط.</p>
+                            <div style="background: rgba(74, 144, 226, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <strong style="color: var(--primary);">المدة:</strong> 3-4 سنوات<br>
+                                <strong style="color: var(--primary);">المستوى:</strong> متوسط<br>
+                                <strong style="color: var(--primary);">الحضور:</strong> يومي
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🎓</div>
+                            <h3>برنامج الطالب المتقدم</h3>
+                            <p style="margin-bottom: 1rem;">دراسة المتون المتقدمة والتخصص في أحد العلوم الشرعية أو اللغوية مع البحث والتأليف.</p>
+                            <div style="background: rgba(74, 144, 226, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <strong style="color: var(--primary);">المدة:</strong> 3-5 سنوات<br>
+                                <strong style="color: var(--primary);">المستوى:</strong> متقدم<br>
+                                <strong style="color: var(--primary);">الحضور:</strong> يومي
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🌙</div>
+                            <h3>البرنامج الصيفي</h3>
+                            <p style="margin-bottom: 1rem;">برنامج مكثف خلال فترة الصيف للمراجعة والحفظ والدورات المتخصصة في العلوم الشرعية.</p>
+                            <div style="background: rgba(74, 144, 226, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <strong style="color: var(--primary);">المدة:</strong> شهران<br>
+                                <strong style="color: var(--primary);">المستوى:</strong> جميع المستويات<br>
+                                <strong style="color: var(--primary);">الحضور:</strong> يومي
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">📅</div>
+                            <h3>الدروس المسائية</h3>
+                            <p style="margin-bottom: 1rem;">دروس مفتوحة للعامة في المساجد والزوايا بعد صلاة المغرب والعشاء في مختلف العلوم.</p>
+                            <div style="background: rgba(74, 144, 226, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <strong style="color: var(--primary);">المدة:</strong> يومياً<br>
+                                <strong style="color: var(--primary);">المستوى:</strong> للجميع<br>
+                                <strong style="color: var(--primary);">الحضور:</strong> مفتوح
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🎤</div>
+                            <h3>الندوات والمؤتمرات</h3>
+                            <p style="margin-bottom: 1rem;">استضافة العلماء والباحثين لإثراء الساحة العلمية والفكرية وتبادل الخبرات والمعارف.</p>
+                            <div style="background: rgba(74, 144, 226, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <strong style="color: var(--primary);">المدة:</strong> شهرياً<br>
+                                <strong style="color: var(--primary);">المستوى:</strong> للجميع<br>
+                                <strong style="color: var(--primary);">الحضور:</strong> مفتوح
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- HISTORY PAGE -->
+        <div id="history" class="page">
+            <section style="padding-top: 4rem; background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); color: white;">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag" style="color: var(--gold);">عبر العصور</span>
+                        <h2 class="section-title" style="color: white;">تاريخ المنطقة</h2>
+                        <p class="section-desc" style="color: rgba(255, 255, 255, 0.8);">مليانة.. مدينة العلم والحضارة عبر القرون</p>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">القرن 1-7 هـ</div>
+                                <h3 style="font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 1rem;">العهد الإسلامي المبكر</h3>
+                                <p style="color: rgba(255, 255, 255, 0.9);">دخلت مليانة الإسلام في القرن الأول الهجري، وأصبحت مركزاً للعلم والدعوة في المغرب الأوسط. انتشرت فيها المساجد وحلقات العلم.</p>
+                            </div>
+                            <div></div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">العهد العثماني</div>
+                                <h3 style="font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 1rem;">عصر المدارس والزوايا</h3>
+                                <p style="color: rgba(255, 255, 255, 0.9);">ازدهرت الحياة العلمية في مليانة، وانتشرت المدارس والزوايا التي خرّجت أجيالاً من العلماء والفقهاء والأدباء.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">القرن 19-20م</div>
+                                <h3 style="font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 1rem;">المقاومة والصمود</h3>
+                                <p style="color: rgba(255, 255, 255, 0.9);">قاومت مليانة الاستعمار الفرنسي بالسلاح والعلم، وحافظت على هويتها رغم التحديات. كانت المساجد والزوايا معاقل للمقاومة الثقافية.</p>
+                            </div>
+                            <div></div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div></div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">العصر الحديث</div>
+                                <h3 style="font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 1rem;">البعث والتجديد</h3>
+                                <p style="color: rgba(255, 255, 255, 0.9);">تسعى مليانة اليوم لاستعادة دورها العلمي والحضاري من خلال مشروع الحاضرة، لتعود منارة للعلم والمعرفة في المنطقة.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem;">
+                        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.2);">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Miliana-tour_de_l%27horloge.jpg/800px-Miliana-tour_de_l%27horloge.jpg" alt="برج الساعة" style="width: 100%; height: 250px; object-fit: cover;">
+                            <p style="padding: 1.5rem; text-align: center; font-family: 'Amiri', serif; font-size: 1.2rem; color: var(--gold);">برج الساعة - معلم تاريخي</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.2);">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Miliana.JPG/1024px-Miliana.JPG" alt="مليانة القديمة" style="width: 100%; height: 250px; object-fit: cover;">
+                            <p style="padding: 1.5rem; text-align: center; font-family: 'Amiri', serif; font-size: 1.2rem; color: var(--gold);">المدينة العتيقة</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SCHOLARS PAGE -->
+        <div id="scholars" class="page">
+            <section style="padding-top: 4rem;">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">الأعلام والرموز</span>
+                        <h2 class="section-title">شيوخ وعلماء</h2>
+                        <p class="section-desc">من علماء مليانة الذين أناروا طريق العلم والمعرفة</p>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon">👤</div>
+                            <h3>الشيخ محمد بن علي</h3>
+                            <div style="background: var(--gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem;">فقيه ومحدث</div>
+                            <p>من كبار علماء القرن 18م، اشتهر بتدريس الفقه المالكي والحديث في المسجد الكبير. تتلمذ على يديه المئات من الطلاب.</p>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">👤</div>
+                            <h3>الشيخ أحمد المليانـي</h3>
+                            <div style="background: var(--gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem;">نحوي ولغوي</div>
+                            <p>أحد أعلام اللغة العربية في المنطقة، ألّف عدة شروح على الآجرومية وقطر الندى. كان مرجعاً في النحو والصرف.</p>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">👤</div>
+                            <h3>الشيخ عبد القادر</h3>
+                            <div style="background: var(--gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem;">مفسر وواعظ</div>
+                            <p>اشتهر بدروس التفسير والوعظ في المسجد الكبير. كان له أثر كبير في تربية الأجيال على القرآن والسنة.</p>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">👤</div>
+                            <h3>الشيخ عمر الزاوي</h3>
+                            <div style="background: var(--gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem;">صوفي ومرب</div>
+                            <p>شيخ الزاوية البنيوسيفية جمع بين العلم والتزكية. خرّج أجيالاً من العلماء والصالحين.</p>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">👤</div>
+                            <h3>الشيخ الحسن بن يوسف</h3>
+                            <div style="background: var(--gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem;">أصولي ومنطقي</div>
+                            <p>تخصص في أصول الفقه والمنطق، وله شروح على مراقي السعود والسلم المنورق. درّس في عدة مساجد.</p>
+                        </div>
+
+                        <div class="card" style="background: rgba(74, 144, 226, 0.05); border: 2px dashed var(--accent);">
+                            <div class="card-icon">➕</div>
+                            <h3>المزيد قريباً</h3>
+                            <p>نعمل على توثيق تراجم علماء مليانة عبر العصور. إن كان لديك معلومات عن أحد العلماء، يرجى التواصل معنا.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- INSTITUTIONS PAGE -->
+        <div id="institutions" class="page">
+            <section style="padding-top: 4rem; background: white;">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">البنية التحتية العلمية</span>
+                        <h2 class="section-title">مدارس ومؤسسات</h2>
+                        <p class="section-desc">المساجد والزوايا والمدارس التي تحتضن الحياة العلمية في مليانة</p>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon">🕌</div>
+                            <h3>المسجد الكبير</h3>
+                            <p style="margin-bottom: 1rem;">أقدم مساجد مليانة، كان ولا يزال مركزاً للعلم والتعليم. تُقام فيه دروس يومية في مختلف العلوم الشرعية.</p>
+                            <span style="background: #4ade80; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">نشط</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🏛️</div>
+                            <h3>الزاوية البنيوسفية </h3>
+                            <p style="margin-bottom: 1rem;">زاوية عريقة تُعنى بتعليم القرآن والفقه والتصوف. لها دور كبير في التربية الروحية والعلمية.</p>
+                            <span style="background: #4ade80; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">نشط</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🕌</div>
+                            <h3>مسجد سيدي أحمد</h3>
+                            <p style="margin-bottom: 1rem;">مسجد تاريخي معروف بحلقات الذكر ودروس التفسير. يستقطب طلاب العلم من المنطقة.</p>
+                            <span style="background: #4ade80; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">نشط</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">📚</div>
+                            <h3>المدرسة القديمة</h3>
+                            <p style="margin-bottom: 1rem;">مدرسة تاريخية تحتاج للترميم وإعادة التفعيل. كانت من أهم مراكز التعليم في المنطقة.</p>
+                            <span style="background: #fbbf24; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">قيد التطوير</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">📖</div>
+                            <h3>المكتبة العمومية</h3>
+                            <p style="margin-bottom: 1rem;">مكتبة تضم مخطوطات ونفائس من تراث المنطقة. مفتوحة للباحثين وطلاب العلم.</p>
+                            <span style="background: #4ade80; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">نشط</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🏫</div>
+                            <h3>دار الحديث</h3>
+                            <p style="margin-bottom: 1rem;">مشروع قادم لتخصيص مركز لدراسة الحديث النبوي وعلومه. سيكون مرجعاً للمحدثين.</p>
+                            <span style="background: var(--accent); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">مخطط</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🎓</div>
+                            <h3>مركز البحوث</h3>
+                            <p style="margin-bottom: 1rem;">مشروع لإنشاء مركز للأبحاث والدراسات الإسلامية. سيكون منصة للباحثين والمفكرين.</p>
+                            <span style="background: var(--accent); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">مخطط</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🌐</div>
+                            <h3>المنصة الرقمية</h3>
+                            <p style="margin-bottom: 1rem;">منصة إلكترونية لبث الدروس وحفظ المحاضرات وربط طلاب العلم في المنطقة.</p>
+                            <span style="background: #fbbf24; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">قيد التطوير</span>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon">🏛️</div>
+                            <h3>الزاوية القادرية</h3>
+                            <p style="margin-bottom: 1rem;">زاوية صوفية تاريخية، معروفة بتدريس القرآن والتزكية. تحتاج لإعادة التأهيل.</p>
+                            <span style="background: #fbbf24; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">قيد التطوير</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>حاضرة مليانة</h4>
+                <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.8;">مشروع حضاري لإحياء التعليم الأصيل على نموذج المحضرة الشنقيطية</p>
+            </div>
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="#" data-page="home">الرئيسية</a></li>
+                    <li><a href="#" data-page="mitaq">الميثاق</a></li>
+                    <li><a href="#" data-page="programs">البرامج</a></li>
+                    <li><a href="#" data-page="scholars">العلماء</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>المحتوى العلمي</h4>
+                <ul>
+                    <li><a href="#" data-page="mutun">المتون</a></li>
+                    <li><a href="#" data-page="history">التاريخ</a></li>
+                    <li><a href="#" data-page="institutions">المؤسسات</a></li>
+                    <li><a href="#">المكتبة الرقمية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>تواصل معنا</h4>
+                <ul>
+                    <li><a href="#">info@miliana.edu.dz</a></li>
+                    <li><a href="#">+213 XX XX XX XX</a></li>
+                    <li><a href="#">مليانة، الجزائر</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2025 حاضرة مليانة</p>
+            <p style="margin-top: 0.5rem; font-family: 'Amiri', serif;">﴿يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ﴾</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation System
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('[data-page]');
+        
+        function showPage(pageId) {
+            // Hide all pages
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Update active nav link
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu if open
+            document.getElementById('navMenu').classList.remove('active');
+        }
+        
+        // Add click event to all nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                showPage(pageId);
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Smooth scroll for anchor links within pages
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards and sections
+        document.querySelectorAll('.card, .feature-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.padding = '0.8rem 2rem';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.12)';
+            } else {
+                nav.style.padding = '1.2rem 2rem';
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.08)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Stats counter animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + '+';
+                }
+            }, 16);
+        }
+        
+        // Observe stats section
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = entry.target.querySelectorAll('.stat-number');
+                    numbers.forEach(num => {
+                        const text = num.textContent;
+                        const arabicNums = {'٠': 0, '١': 1, '٢': 2, '٣': 3, '٤': 4, '٥': 5, '٦': 6, '٧': 7, '٨': 8, '٩': 9};
+                        let value = 0;
+                        for (let char of text) {
+                            if (arabicNums[char] !== undefined) {
+                                value = value * 10 + arabicNums[char];
+                            }
+                        }
+                        if (value > 0) {
+                            num.textContent = '٠';
+                            animateCounter(num, value);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+        
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const scrolled = window.pageYOffset;
+                const heroContent = hero.querySelector('.hero-content');
+                if (heroContent && scrolled < window.innerHeight) {
+                    heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
+                    heroContent.style.opacity = 1 - (scrolled / 700);
+                }
+            }
+        });
+        
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Lazy loading for images
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.5s ease';
+                    
+                    if (img.complete) {
+                        img.style.opacity = '1';
+                    } else {
+                        img.onload = () => {
+                            img.style.opacity = '1';
+                        };
+                    }
+                    
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('img').forEach(img => {
+            imageObserver.observe(img);
+        });
+        
+        // Handle card hover effects with 3D transform
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+        
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            // Press 'h' for home
+            if (e.key === 'h' && !e.ctrlKey && !e.metaKey) {
+                const homeLink = document.querySelector('[data-page="home"]');
+                if (homeLink) homeLink.click();
+            }
+        });
+        
+        // Print active page name in console for debugging
+        console.log('%c حاضرة مليانة - Miliana Civilizational Project', 'color: #1e3a5f; font-size: 20px; font-weight: bold;');
+        console.log('%c منارة العلم والتزكية', 'color: #d4af37; font-size: 14px;');
+        
+        // Add smooth transitions to timeline items
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 200);
+                    timelineObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = index % 2 === 0 ? 'translateX(-50px)' : 'translateX(50px)';
+            item.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            timelineObserver.observe(item);
+        });
+        
+        // Feature cards stagger animation
+        const featureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const features = entry.target.querySelectorAll('.feature-card');
+                    features.forEach((feature, index) => {
+                        setTimeout(() => {
+                            feature.style.opacity = '1';
+                            feature.style.transform = 'translateY(0)';
+                        }, index * 150);
+                    });
+                    featureObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        document.querySelectorAll('.features-grid').forEach(grid => {
+            grid.querySelectorAll('.feature-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+            });
+            featureObserver.observe(grid);
+        });
+        
+        // Add loading state for logo
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            logo.addEventListener('error', function() {
+                this.style.display = 'none';
+            });
+        }
+        
+        // Enhance scroll behavior for hero section
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const hero = document.querySelector('.hero');
+                    
+                    if (hero && scrolled < window.innerHeight) {
+                        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    }
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+        
+        // Add focus states for accessibility
+        document.querySelectorAll('a, button').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.outline = '3px solid var(--accent)';
+                this.style.outlineOffset = '2px';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.outline = 'none';
+            });
+        });
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show home page by default
+            showPage('home');
+            
+            // Add fade-in animation to nav
+            const nav = document.querySelector('nav');
+            nav.style.opacity = '0';
+            nav.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                nav.style.transition = 'all 0.6s ease';
+                nav.style.opacity = '1';
+                nav.style.transform = 'translateY(0)';
+            }, 100);
+        });
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.page) {
+                showPage(e.state.page);
+            }
+        });
+        
+        // Update URL without reload (optional feature)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const pageId = link.getAttribute('data-page');
+                history.pushState({ page: pageId }, '', `#${pageId}`);
+            });
+        });
+        
+        // Check URL on load
+        const hash = window.location.hash.substring(1);
+        if (hash && document.getElementById(hash)) {
+            showPage(hash);
+        }
+        window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  if (window.scrollY > 80) nav.classList.add('shrink');
+  else nav.classList.remove('shrink');
+});
+
+    </script>
+</body>
+</html>
