@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "144144012452",
+    "project_id": "miliana-hadirat-a190c",
+    "storage_bucket": "miliana-hadirat-a190c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144144012452:android:f989da8935ffa07d298231",
+        "android_client_info": {
+          "package_name": "Miliana.hadirat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYJXjj_R3vsxJviBERNB1lmD_0UDCaQ1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144144012452:android:79527703cde3ef43298231",
+        "android_client_info": {
+          "package_name": "com.example.miliana_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYJXjj_R3vsxJviBERNB1lmD_0UDCaQ1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

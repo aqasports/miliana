@@ -1,9 +1,14 @@
 class Mutun {
   final String id;
   final String name;
-  final String description;
   final String author;
-  final List<String> sharhVideoUrls; // URLs to sharh videos
+  final String littleDesc; // Little description
+  final String description; // Full description
+  final String level; // Beginner, Intermediate, Advanced
+  final String chikhId; // ID of the chikh teaching this mutun
+  final List<String> videoPlaylistUrls; // YouTube playlist URLs for sharh videos
+  final List<String> pdfLinks; // Multiple PDF download links
+  final List<String> sharhVideoUrls; // URLs to sharh videos (kept for compatibility)
   final String pdfMatenUrl;
   final String pdfSharhUrl;
   final String bookTitle;
@@ -13,8 +18,13 @@ class Mutun {
   Mutun({
     required this.id,
     required this.name,
-    required this.description,
     required this.author,
+    required this.littleDesc,
+    required this.description,
+    required this.level,
+    required this.chikhId,
+    required this.videoPlaylistUrls,
+    required this.pdfLinks,
     required this.sharhVideoUrls,
     required this.pdfMatenUrl,
     required this.pdfSharhUrl,
@@ -22,15 +32,62 @@ class Mutun {
     required this.bookAuthor,
     required this.bookDescription,
   });
+
+  /// Convert to JSON for Firestore
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'author': author,
+      'littleDesc': littleDesc,
+      'description': description,
+      'level': level,
+      'chikhId': chikhId,
+      'videoPlaylistUrls': videoPlaylistUrls,
+      'pdfLinks': pdfLinks,
+      'sharhVideoUrls': sharhVideoUrls,
+      'pdfMatenUrl': pdfMatenUrl,
+      'pdfSharhUrl': pdfSharhUrl,
+      'bookTitle': bookTitle,
+      'bookAuthor': bookAuthor,
+      'bookDescription': bookDescription,
+    };
+  }
+
+  /// Create from JSON (Firestore)
+  factory Mutun.fromJson(Map<String, dynamic> json) {
+    return Mutun(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      author: json['author'] ?? '',
+      littleDesc: json['littleDesc'] ?? '',
+      description: json['description'] ?? '',
+      level: json['level'] ?? 'Intermediate',
+      chikhId: json['chikhId'] ?? '',
+      videoPlaylistUrls: List<String>.from(json['videoPlaylistUrls'] ?? []),
+      pdfLinks: List<String>.from(json['pdfLinks'] ?? []),
+      sharhVideoUrls: List<String>.from(json['sharhVideoUrls'] ?? []),
+      pdfMatenUrl: json['pdfMatenUrl'] ?? '',
+      pdfSharhUrl: json['pdfSharhUrl'] ?? '',
+      bookTitle: json['bookTitle'] ?? '',
+      bookAuthor: json['bookAuthor'] ?? '',
+      bookDescription: json['bookDescription'] ?? '',
+    );
+  }
 }
 
 // List of all matns
 final List<Mutun> allMatuns = [
   Mutun(
-    id: '1',
+    id: 'mutun_1',
     name: 'اختصر الأخضري',
-    description: 'كتاب في الفقه المالكي يجمع بين الاختصار والشمول',
     author: 'الإمام أحمد الأخضري',
+    littleDesc: 'متن في الفقه المالكي',
+    description: 'كتاب في الفقه المالكي يجمع بين الاختصار والشمول، يشرح أحكام العبادات والمعاملات',
+    level: 'Beginner',
+    chikhId: 'chikh_1',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx1'],
+    pdfLinks: ['https://example.com/maten1.pdf', 'https://example.com/sharh1.pdf'],
     sharhVideoUrls: ['https://example.com/video1', 'https://example.com/video2'],
     pdfMatenUrl: 'https://example.com/maten1.pdf',
     pdfSharhUrl: 'https://example.com/sharh1.pdf',
@@ -39,10 +96,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح مفصل وسهل الفهم لمتن الأخضري',
   ),
   Mutun(
-    id: '2',
+    id: 'mutun_2',
     name: 'المرشد المعين',
-    description: 'متن في التجويد والقراءات',
     author: 'الإمام الشاطبي',
+    littleDesc: 'متن في التجويد والقراءات',
+    description: 'متن مهم في علم التجويد وقراءات القرآن الكريم',
+    level: 'Intermediate',
+    chikhId: 'chikh_1',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx2'],
+    pdfLinks: ['https://example.com/maten2.pdf', 'https://example.com/sharh2.pdf'],
     sharhVideoUrls: ['https://example.com/video3'],
     pdfMatenUrl: 'https://example.com/maten2.pdf',
     pdfSharhUrl: 'https://example.com/sharh2.pdf',
@@ -51,10 +113,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح جامع للمرشد المعين',
   ),
   Mutun(
-    id: '3',
+    id: 'mutun_3',
     name: 'بانت سعاد',
-    description: 'قصيدة جاهلية مشهورة في النحو والصرف',
     author: 'قيس بن الملوح',
+    littleDesc: 'قصيدة في النحو والصرف',
+    description: 'قصيدة جاهلية مشهورة تُدرّس لفوائدها النحوية والصرفية',
+    level: 'Intermediate',
+    chikhId: 'chikh_1',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx3'],
+    pdfLinks: ['https://example.com/maten3.pdf', 'https://example.com/sharh3.pdf'],
     sharhVideoUrls: ['https://example.com/video4', 'https://example.com/video5'],
     pdfMatenUrl: 'https://example.com/maten3.pdf',
     pdfSharhUrl: 'https://example.com/sharh3.pdf',
@@ -63,10 +130,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'تحليل شامل لقصيدة بانت سعاد',
   ),
   Mutun(
-    id: '4',
+    id: 'mutun_4',
     name: 'الورقات',
-    description: 'مقدمة في أصول الفقه',
     author: 'الإمام الجويني',
+    littleDesc: 'مقدمة في أصول الفقه',
+    description: 'مقدمة مهمة في أصول الفقه، تشرح مبادئ الاستدلال الفقهي',
+    level: 'Advanced',
+    chikhId: 'chikh_2',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx4'],
+    pdfLinks: ['https://example.com/maten4.pdf', 'https://example.com/sharh4.pdf'],
     sharhVideoUrls: ['https://example.com/video6'],
     pdfMatenUrl: 'https://example.com/maten4.pdf',
     pdfSharhUrl: 'https://example.com/sharh4.pdf',
@@ -75,10 +147,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح مفيد لمتن الورقات',
   ),
   Mutun(
-    id: '5',
+    id: 'mutun_5',
     name: 'أصول مالك ابن أبي كف',
-    description: 'متن في أصول الفقه المالكي',
     author: 'مالك ابن أبي كف',
+    littleDesc: 'متن في أصول الفقه المالكي',
+    description: 'متن متخصص في أصول الفقه المالكي وقواعده',
+    level: 'Advanced',
+    chikhId: 'chikh_2',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx5'],
+    pdfLinks: ['https://example.com/maten5.pdf', 'https://example.com/sharh5.pdf'],
     sharhVideoUrls: ['https://example.com/video7', 'https://example.com/video8'],
     pdfMatenUrl: 'https://example.com/maten5.pdf',
     pdfSharhUrl: 'https://example.com/sharh5.pdf',
@@ -87,10 +164,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح تفصيلي لأصول الفقه',
   ),
   Mutun(
-    id: '6',
+    id: 'mutun_6',
     name: 'مطهرة القلوب',
-    description: 'متن في السلوك والتزكية',
     author: 'الإمام الهروي',
+    littleDesc: 'متن في السلوك والتزكية',
+    description: 'متن يركز على تزكية النفس والسلوك الإسلامي',
+    level: 'Beginner',
+    chikhId: 'chikh_3',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx6'],
+    pdfLinks: ['https://example.com/maten6.pdf', 'https://example.com/sharh6.pdf'],
     sharhVideoUrls: ['https://example.com/video9'],
     pdfMatenUrl: 'https://example.com/maten6.pdf',
     pdfSharhUrl: 'https://example.com/sharh6.pdf',
@@ -99,10 +181,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح معمق للسلوك الإسلامي',
   ),
   Mutun(
-    id: '7',
+    id: 'mutun_7',
     name: 'عبيد ربه',
-    description: 'متن في الآداب والسلوك',
     author: 'الإمام ابن المبارك',
+    littleDesc: 'متن في الآداب والسلوك',
+    description: 'متن في الآداب الإسلامية والحكمة',
+    level: 'Beginner',
+    chikhId: 'chikh_3',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx7'],
+    pdfLinks: ['https://example.com/maten7.pdf', 'https://example.com/sharh7.pdf'],
     sharhVideoUrls: ['https://example.com/video10'],
     pdfMatenUrl: 'https://example.com/maten7.pdf',
     pdfSharhUrl: 'https://example.com/sharh7.pdf',
@@ -111,10 +198,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح شامل للآداب الإسلامية',
   ),
   Mutun(
-    id: '8',
+    id: 'mutun_8',
     name: 'أسهل المسالك',
-    description: 'متن في النحو والصرف',
     author: 'الإمام ابن هشام',
+    littleDesc: 'متن في النحو والصرف',
+    description: 'متن مشهور في قواعد اللغة العربية',
+    level: 'Intermediate',
+    chikhId: 'chikh_3',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx8'],
+    pdfLinks: ['https://example.com/maten8.pdf', 'https://example.com/sharh8.pdf'],
     sharhVideoUrls: ['https://example.com/video11', 'https://example.com/video12'],
     pdfMatenUrl: 'https://example.com/maten8.pdf',
     pdfSharhUrl: 'https://example.com/sharh8.pdf',
@@ -123,10 +215,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح شهير وسهل الفهم',
   ),
   Mutun(
-    id: '9',
+    id: 'mutun_9',
     name: 'الأرجوزة الميئية',
-    description: 'أرجوزة في الحديث والتخريج',
     author: 'الإمام العراقي',
+    littleDesc: 'أرجوزة في الحديث والتخريج',
+    description: 'أرجوزة مهمة في علوم الحديث',
+    level: 'Advanced',
+    chikhId: 'chikh_3',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx9'],
+    pdfLinks: ['https://example.com/maten9.pdf', 'https://example.com/sharh9.pdf'],
     sharhVideoUrls: ['https://example.com/video13'],
     pdfMatenUrl: 'https://example.com/maten9.pdf',
     pdfSharhUrl: 'https://example.com/sharh9.pdf',
@@ -135,10 +232,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح علمي ودقيق',
   ),
   Mutun(
-    id: '10',
+    id: 'mutun_10',
     name: 'نصيحة حماد',
-    description: 'متن في الحديث والفقه',
     author: 'حماد ابن أبي سليمان',
+    littleDesc: 'متن في الحديث والفقه',
+    description: 'نصائح وفوائد في الحديث والفقه',
+    level: 'Intermediate',
+    chikhId: 'chikh_3',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx10'],
+    pdfLinks: ['https://example.com/maten10.pdf', 'https://example.com/sharh10.pdf'],
     sharhVideoUrls: ['https://example.com/video14'],
     pdfMatenUrl: 'https://example.com/maten10.pdf',
     pdfSharhUrl: 'https://example.com/sharh10.pdf',
@@ -147,10 +249,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح مفيد وميسر',
   ),
   Mutun(
-    id: '11',
+    id: 'mutun_11',
     name: 'الطيبية',
-    description: 'قصيدة في التجويد والقراءات',
     author: 'الإمام الشاطبي',
+    littleDesc: 'قصيدة في التجويد والقراءات',
+    description: 'قصيدة مهمة في قراءات القرآن',
+    level: 'Advanced',
+    chikhId: 'chikh_2',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx11'],
+    pdfLinks: ['https://example.com/maten11.pdf', 'https://example.com/sharh11.pdf'],
     sharhVideoUrls: ['https://example.com/video15', 'https://example.com/video16'],
     pdfMatenUrl: 'https://example.com/maten11.pdf',
     pdfSharhUrl: 'https://example.com/sharh11.pdf',
@@ -159,10 +266,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح مفصل للقراءات',
   ),
   Mutun(
-    id: '12',
+    id: 'mutun_12',
     name: 'القلادة المكية',
-    description: 'متن في التوحيد والعقيدة',
     author: 'الإمام القرافي',
+    littleDesc: 'متن في التوحيد والعقيدة',
+    description: 'متن مهم في التوحيد والعقيدة الإسلامية',
+    level: 'Intermediate',
+    chikhId: 'chikh_2',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx12'],
+    pdfLinks: ['https://example.com/maten12.pdf', 'https://example.com/sharh12.pdf'],
     sharhVideoUrls: ['https://example.com/video17'],
     pdfMatenUrl: 'https://example.com/maten12.pdf',
     pdfSharhUrl: 'https://example.com/sharh12.pdf',
@@ -171,10 +283,15 @@ final List<Mutun> allMatuns = [
     bookDescription: 'شرح قيم في التوحيد',
   ),
   Mutun(
-    id: '13',
+    id: 'mutun_13',
     name: 'مقدمة الرسالة',
-    description: 'مقدمة رسالة الإمام الشافعي',
     author: 'الإمام الشافعي',
+    littleDesc: 'مقدمة في أصول الفقه',
+    description: 'مقدمة الإمام الشافعي في أصول الفقه الشافعي',
+    level: 'Advanced',
+    chikhId: 'chikh_1',
+    videoPlaylistUrls: ['https://www.youtube.com/playlist?list=PLxxx13'],
+    pdfLinks: ['https://example.com/maten13.pdf', 'https://example.com/sharh13.pdf'],
     sharhVideoUrls: ['https://example.com/video18', 'https://example.com/video19'],
     pdfMatenUrl: 'https://example.com/maten13.pdf',
     pdfSharhUrl: 'https://example.com/sharh13.pdf',

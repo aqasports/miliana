@@ -1,0 +1,96 @@
+miliana-hadirat app structure:
+
+Root Directory:
+├── analysis_options.yaml
+├── APK_GUIDE.md
+├── DEPLOYMENT.md
+├── firebase.json
+├── FIRESTORE_INTEGRATION_COMPLETE.md
+├── miliana_app.iml
+├── miliana_modern_site.html
+├── pubspec.yaml
+├── README.md
+├── test_compile.dart
+├── android/
+│   ├── build.gradle.kts
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   ├── local.properties
+│   ├── miliana_app_android.iml
+│   ├── settings.gradle.kts
+│   ├── app/
+│   │   ├── build.gradle.kts
+│   │   ├── google-services.json
+│   │   └── src/
+│   └── gradle/
+│       └── wrapper/
+├── assets/
+│   ├── fonts/
+│   │   ├── OFL.txt
+│   │   ├── Amiri/
+│   │   ├── Cairo/
+│   │   └── Tajawal/
+│   └── images/
+├── build/
+│   └── ...
+├── ios/
+│   └── ...
+├── lib/
+│   ├── firebase_options.dart
+│   ├── main.dart
+│   ├── constants/
+│   │   └── app_colors.dart
+│   ├── models/
+│   │   ├── chikh_model.dart
+│   │   ├── mutun_model.dart
+│   │   ├── order_model.dart
+│   │   └── user_model.dart
+│   ├── pages/
+│   │   ├── admin_dashboard.dart
+│   │   ├── admin_gate.dart
+│   │   ├── history_page.dart
+│   │   ├── home_page.dart
+│   │   ├── institutions_page.dart
+│   │   ├── login_page.dart
+│   │   ├── mitaq_page.dart
+│   │   ├── mutun_detail_page.dart
+│   │   ├── mutun_page.dart
+│   │   ├── programs_page.dart
+│   │   ├── scholars_page.dart
+│   │   ├── splash_page.dart
+│   ├── services/
+│   │   ├── auth_service.dart
+│   │   └── ...
+│   └── widgets/
+│       └── ...
+├── linux/
+│   └── ...
+├── macos/
+│   └── ...
+├── miliana/
+│   ├── index.html
+│   ├── LICENSE.txt
+│   ├── package.json
+│   ├── README.md
+│   ├── swa-cli.config.json
+│   ├── tsconfig.json
+│   ├── vite.config.ts
+│   ├── public/
+│   └── src/
+├── test/
+│   └── widget_test.dart
+├── web/
+│   ├── index.html
+│   ├── manifest.json
+│   └── icons/
+└── windows/
+    └── ...
+
+Key points:
+- Main Flutter code is in the `lib/` directory (pages, models, services, widgets)
+- Android and iOS native folders for platform-specific code
+- Firebase config in `lib/firebase_options.dart` and `android/app/google-services.json`
+- Web and desktop support present
+- Assets (fonts, images) in `assets/`
+- Additional web app in `miliana/`

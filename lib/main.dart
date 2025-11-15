@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'constants/app_colors.dart';
 import 'pages/home_page.dart';
-import 'pages/mitaq_page.dart';
 import 'pages/mutun_page.dart';
 import 'pages/programs_page.dart';
-import 'pages/history_page.dart';
-import 'pages/scholars_page.dart';
 import 'pages/institutions_page.dart';
+import 'pages/admin_gate.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -42,25 +46,22 @@ class MainNavigation extends StatefulWidget {
 
 class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final List<Widget> _pages = const [
-    HomePage(),
-    MitaqPage(),
-    MutunPage(),
-    ProgramsPage(),
-    HistoryPage(),
-    ScholarsPage(),
-    InstitutionsPage(),
+  final List<Widget> _pages = [
+    const HomePage(),
+    const MutunPage(),
+    const ProgramsPage(),
+    const InstitutionsPage(),
+  AdminGate(),
   ];
 
   final List<String> _titles = [
     'الرئيسية',
-    'الميثاق',
     'المتون',
     'البرامج',
-    'التاريخ',
-    'العلماء',
     'المؤسسات',
+    'لوحة التحكم',
   ];
 
   void _onItemTapped(int index) {
@@ -68,7 +69,7 @@ class _MainNavigationState extends State<MainNavigation> {
       _selectedIndex = index;
     });
     // Only pop if there's an open drawer
-    if (Scaffold.of(context).isDrawerOpen) {
+    if (_scaffoldKey.currentState?.isDrawerOpen ?? false) {
       Navigator.pop(context);
     }
   }
@@ -78,6 +79,7 @@ class _MainNavigationState extends State<MainNavigation> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: AppColors.cream,
         appBar: AppBar(
           title: Row(
@@ -208,12 +210,10 @@ class _MainNavigationState extends State<MainNavigation> {
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w400),
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
-            BottomNavigationBarItem(icon: Icon(Icons.article), label: 'الميثاق'),
             BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: 'المتون'),
             BottomNavigationBarItem(icon: Icon(Icons.school), label: 'البرامج'),
-            BottomNavigationBarItem(icon: Icon(Icons.history), label: 'التاريخ'),
-            BottomNavigationBarItem(icon: Icon(Icons.people), label: 'العلماء'),
             BottomNavigationBarItem(icon: Icon(Icons.account_balance), label: 'المؤسسات'),
+            BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'لوحة التحكم'),
           ],
         ),
       ),
@@ -225,17 +225,13 @@ class _MainNavigationState extends State<MainNavigation> {
       case 0:
         return Icons.home;
       case 1:
-        return Icons.article;
-      case 2:
         return Icons.menu_book;
-      case 3:
+      case 2:
         return Icons.school;
-      case 4:
-        return Icons.history;
-      case 5:
-        return Icons.people;
-      case 6:
+      case 3:
         return Icons.account_balance;
+      case 4:
+        return Icons.dashboard;
       default:
         return Icons.circle;
     }

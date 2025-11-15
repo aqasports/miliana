@@ -64,6 +64,7 @@ class MutunDetailPage extends StatelessWidget {
                         fontSize: 15,
                         color: Colors.white70,
                         fontStyle: FontStyle.italic,
+                        
                       ),
                     ),
                     const SizedBox(height: 12),

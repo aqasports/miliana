@@ -1,0 +1,206 @@
+// lib/services/auth_service.dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class AuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // Get current user
+  User? get currentUser => _auth.currentUser;
+
+  // Auth state stream
+  Stream<User?> get authStateChanges => _auth.authStateChanges();
+
+  // Sign in with email and password
+  Future<Map<String, dynamic>> signInWithEmailPassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Get user role from Firestore
+      String role = await getUserRole(result.user!.uid);
+
+      return {
+        'success': true,
+        'user': result.user,
+        'role': role,
+        'message': 'تم تسجيل الدخول بنجاح',
+      };
+    } on FirebaseAuthException catch (e) {
+      String message;
+      switch (e.code) {
+        case 'user-not-found':
+          message = 'لم يتم العثور على حساب بهذا البريد الإلكتروني';
+          break;
+        case 'wrong-password':
+          message = 'كلمة المرور غير صحيحة';
+          break;
+        case 'invalid-email':
+          message = 'البريد الإلكتروني غير صالح';
+          break;
+        case 'user-disabled':
+          message = 'تم تعطيل هذا الحساب';
+          break;
+        case 'too-many-requests':
+          message = 'محاولات كثيرة جداً. يرجى المحاولة لاحقاً';
+          break;
+        case 'invalid-credential':
+          message = 'بيانات الدخول غير صحيحة';
+          break;
+        default:
+          message = 'حدث خطأ: ${e.message}';
+      }
+      return {
+        'success': false,
+        'message': message,
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'حدث خطأ غير متوقع: $e',
+      };
+    }
+  }
+
+  // Sign up with email and password
+  Future<Map<String, dynamic>> signUpWithEmailPassword({
+    required String email,
+    required String password,
+    required String name,
+    String role = 'student', // Default role is student
+  }) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Update display name
+      await result.user!.updateDisplayName(name);
+
+      // Create user document in Firestore
+      await _firestore.collection('users').doc(result.user!.uid).set({
+        'name': name,
+        'email': email,
+        'role': role,
+        'createdAt': FieldValue.serverTimestamp(),
+        'lastLogin': FieldValue.serverTimestamp(),
+      });
+
+      return {
+        'success': true,
+        'user': result.user,
+        'role': role,
+        'message': 'تم إنشاء الحساب بنجاح',
+      };
+    } on FirebaseAuthException catch (e) {
+      String message;
+      switch (e.code) {
+        case 'email-already-in-use':
+          message = 'هذا البريد الإلكتروني مستخدم بالفعل';
+          break;
+        case 'weak-password':
+          message = 'كلمة المرور ضعيفة جداً';
+          break;
+        case 'invalid-email':
+          message = 'البريد الإلكتروني غير صالح';
+          break;
+        default:
+          message = 'حدث خطأ: ${e.message}';
+      }
+      return {
+        'success': false,
+        'message': message,
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'حدث خطأ غير متوقع: $e',
+      };
+    }
+  }
+
+  // Get user role from Firestore
+  Future<String> getUserRole(String uid) async {
+    try {
+      DocumentSnapshot doc = await _firestore.collection('users').doc(uid).get();
+      
+      if (doc.exists) {
+        Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+        return data?['role'] ?? 'student';
+      }
+      return 'student';
+    } catch (e) {
+      print('Error getting user role: $e');
+      return 'student';
+    }
+  }
+
+  // Update last login timestamp
+  Future<void> updateLastLogin() async {
+    if (currentUser != null) {
+      try {
+        await _firestore.collection('users').doc(currentUser!.uid).update({
+          'lastLogin': FieldValue.serverTimestamp(),
+        });
+      } catch (e) {
+        print('Error updating last login: $e');
+      }
+    }
+  }
+
+  // Check if user is admin
+  Future<bool> isAdmin() async {
+    if (currentUser == null) return false;
+    String role = await getUserRole(currentUser!.uid);
+    return role == 'admin';
+  }
+
+  // Reset password
+  Future<Map<String, dynamic>> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return {
+        'success': true,
+        'message': 'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
+      };
+    } on FirebaseAuthException catch (e) {
+      String message;
+      switch (e.code) {
+        case 'user-not-found':
+          message = 'لم يتم العثور على حساب بهذا البريد الإلكتروني';
+          break;
+        case 'invalid-email':
+          message = 'البريد الإلكتروني غير صالح';
+          break;
+        default:
+          message = 'حدث خطأ: ${e.message}';
+      }
+      return {
+        'success': false,
+        'message': message,
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'حدث خطأ غير متوقع',
+      };
+    }
+  }
+
+  // Sign out
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
+  // Get user data stream
+  Stream<DocumentSnapshot> getUserDataStream(String uid) {
+    return _firestore.collection('users').doc(uid).snapshots();
+  }
+}
